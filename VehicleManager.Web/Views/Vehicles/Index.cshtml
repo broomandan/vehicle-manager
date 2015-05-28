@@ -1,0 +1,33 @@
+﻿@model IEnumerable<VehicleManager.Web.Models.VehicleMakeModel>
+
+@{
+    ViewBag.Title = "List of Makes";
+}
+
+<h2>List of Makes</h2>
+
+<p>
+    @Html.ActionLink("Add New Make", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Make)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Make)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id = item.Make}) |
+                @Html.ActionLink("Delete", "Delete", new {id = item.Make})
+            </td>
+        </tr>
+    }
+
+</table>
