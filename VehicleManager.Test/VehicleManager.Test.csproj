@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1F24E24C-B4B6-4043-B5E1-BACC3E0D0483}</ProjectGuid>
+    <ProjectGuid>{B393F547-0704-4CAC-811D-1200BC7A3036}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VehicleManager.Business</RootNamespace>
-    <AssemblyName>VehicleManager.Business</AssemblyName>
+    <RootNamespace>VehicleManager.Test</RootNamespace>
+    <AssemblyName>VehicleManager.Test</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,16 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DuplicateEntryException.cs" />
-    <Compile Include="IUserVehicleManager.cs" />
-    <Compile Include="IVehicleManager.cs" />
-    <Compile Include="IVehicleReportManager.cs" />
-    <Compile Include="MakeMpgStatistics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserVehicle.cs" />
-    <Compile Include="VehicleMake.cs" />
-    <Compile Include="VehicleManager.cs" />
-    <Compile Include="VehicleNotFoundException.cs" />
+    <Compile Include="VehicleReportManagerTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VehicleManager.Business\VehicleManager.Business.csproj">
+      <Project>{1F24E24C-B4B6-4043-B5E1-BACC3E0D0483}</Project>
+      <Name>VehicleManager.Business</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

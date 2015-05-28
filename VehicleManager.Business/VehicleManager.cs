@@ -4,8 +4,9 @@ using System.Linq;
 
 namespace VehicleManager.Business
 {
-    public class VehicleManager : IVehicleManager, IUserVehicleManager
+    public class VehicleManager : IVehicleManager, IUserVehicleManager, IVehicleReportManager
     {
+        // These to static objects playing the role of database/database access in this implemenation  
         private static readonly IList<VehicleMake> VehicleMakes;
         private static readonly IList<UserVehicle> UserVehicles;
 
@@ -23,7 +24,7 @@ namespace VehicleManager.Business
             UserVehicles = new List<UserVehicle>();
         }
 
-        public ICollection<VehicleMake> GetMakes()
+        public IEnumerable<VehicleMake> GetMakes()
         {
             return VehicleMakes;
         }
@@ -96,6 +97,19 @@ namespace VehicleManager.Business
         {
             var updatingVehicle = FindVehicle(id);
             updatingVehicle.Mpg = mpg;
+        }
+
+        public IEnumerable<MakeMpgStatistics> GetAllMakesMpgStatsitics()
+        {
+            return UserVehicles
+                .GroupBy(m => m.Make.Make)
+                .Select(g => new MakeMpgStatistics
+                {
+                    Make = g.Key,
+                    MinimumMpg = g.Min(i => i.Mpg),
+                    MaximumMpg = g.Max(i => i.Mpg),
+                    AverageMpg = (byte) g.Average(i => i.Mpg)
+                });
         }
     }
 }

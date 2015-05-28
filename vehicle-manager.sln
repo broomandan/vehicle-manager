@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleManager.Web", "Vehic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleManager.Business", "VehicleManager.Business\VehicleManager.Business.csproj", "{1F24E24C-B4B6-4043-B5E1-BACC3E0D0483}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleManager.Test", "VehicleManager.Test\VehicleManager.Test.csproj", "{B393F547-0704-4CAC-811D-1200BC7A3036}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1F24E24C-B4B6-4043-B5E1-BACC3E0D0483}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F24E24C-B4B6-4043-B5E1-BACC3E0D0483}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F24E24C-B4B6-4043-B5E1-BACC3E0D0483}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B393F547-0704-4CAC-811D-1200BC7A3036}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B393F547-0704-4CAC-811D-1200BC7A3036}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B393F547-0704-4CAC-811D-1200BC7A3036}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B393F547-0704-4CAC-811D-1200BC7A3036}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
