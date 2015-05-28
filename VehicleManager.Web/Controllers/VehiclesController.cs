@@ -25,7 +25,7 @@ namespace VehicleManager.Web.Controllers
         {
             var model = _vehicleManager.GetMakes();
             // TODO: use AutoMapper
-            var viewModel = model.Select(x => new VehicleMakeModel
+            var viewModel = model.Select(x => new VehicleMakeViewModel
             {
                 Make = x.Make
             });
@@ -107,10 +107,10 @@ namespace VehicleManager.Web.Controllers
             }
         }
 
-        private VehicleMakeModel FindVehicleMakeModel(string id)
+        private VehicleMakeViewModel FindVehicleMakeModel(string id)
         {
             var make = _vehicleManager.FindMake(id);
-            var viewModel = new VehicleMakeModel {Make = make.Make};
+            var viewModel = new VehicleMakeViewModel {Make = make.Make};
             return viewModel;
         }
     }

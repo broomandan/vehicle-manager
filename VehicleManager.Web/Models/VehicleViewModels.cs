@@ -2,7 +2,7 @@
 
 namespace VehicleManager.Web.Models
 {
-    public class VehicleMakeModel
+    public class VehicleMakeViewModel
     {
         [Required(ErrorMessage = "Make should always be defined.")]
         public string Make { get; set; }

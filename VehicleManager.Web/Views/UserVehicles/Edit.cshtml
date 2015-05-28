@@ -1,10 +1,10 @@
-﻿@model VehicleManager.Web.Models.VehicleMakeViewModel
+﻿@model VehicleManager.Web.Models.UserVehicleViewModel
 
 @{
-    ViewBag.Title = "Edit Make";
+    ViewBag.Title = "Edit";
 }
 
-<h2>Edit Make</h2>
+<h2>Edit Mpg for your @Model.Make</h2>
 
 
 @using (Html.BeginForm())
@@ -12,17 +12,18 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Editing @Model.Make</h4>
+        <h4>@Model.Make</h4>
         <hr />
         @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+        @Html.HiddenFor(model => model.Id)
+
         <div class="form-group">
-            @Html.LabelFor(model => model.Make, htmlAttributes: new {@class = "control-label col-md-2"})
+            @Html.LabelFor(model => model.Mpg, htmlAttributes: new {@class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Make, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.Make, "", new {@class = "text-danger"})
+                @Html.EditorFor(model => model.Mpg, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.Mpg, "", new {@class = "text-danger"})
             </div>
         </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />

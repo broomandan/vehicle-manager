@@ -1,7 +1,7 @@
-﻿@model VehicleManager.Web.Models.VehicleMakeViewModel
+﻿@model VehicleManager.Web.Models.UserVehicleViewModel
 
 @{
-    ViewBag.Title = "Delete Make";
+    ViewBag.Title = "Delete Vehicle";
 }
 
 <h2>Deleting @Model.Make</h2>
@@ -12,6 +12,14 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.Mpg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mpg)
+        </dd>
+
+        <dt>
             @Html.DisplayNameFor(model => model.Make)
         </dt>
 
@@ -21,8 +29,7 @@
 
     </dl>
 
-    @using (Html.BeginForm())
-    {
+    @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">

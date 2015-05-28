@@ -1,0 +1,38 @@
+﻿@model IEnumerable<VehicleManager.Web.Models.UserVehicleViewModel>
+
+@{
+    ViewBag.Title = "List of you vehicles";
+}
+
+<h2>List of you vehicles</h2>
+
+<p>
+    @Html.ActionLink("Add Vehicle", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Make)
+        </th>
+         <th>
+            @Html.DisplayNameFor(model => model.Mpg)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Make)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mpg)
+            </td>
+            <td>
+                @Html.ActionLink("Edit Mpg", "Edit", new {id = item.Id}) |
+                @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+            </td>
+        </tr>
+    }
+</table>
