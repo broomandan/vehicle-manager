@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace VehicleManager.Web.Models
 {
@@ -10,10 +12,13 @@ namespace VehicleManager.Web.Models
 
         [Required]
         [Display(Name = "Mile Per Galon")]
-        public uint Mpg { get; set; }
+        [Range(0, byte.MaxValue)]
+        public byte Mpg { get; set; }
 
         [Required]
         [ReadOnly(true)]
         public string Make { get; set; }
+
+        public IEnumerable<SelectListItem> Makes { get; set; }
     }
 }

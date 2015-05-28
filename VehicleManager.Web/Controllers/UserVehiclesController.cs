@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
@@ -11,18 +10,22 @@ namespace VehicleManager.Web.Controllers
     public class UserVehiclesController : Controller
     {
         private readonly IUserVehicleManager _userVehicleManager;
+        private readonly IVehicleManager _vehicleManager;
         private readonly string _currentUserName;
 
-        public UserVehiclesController(IUserVehicleManager userVehicleManager)
+        public UserVehiclesController(IUserVehicleManager userVehicleManager, IVehicleManager vehicleManager)
         {
             //TODO Extend user identity to include userId 
             _currentUserName = User.Identity.GetUserId();
+
             _userVehicleManager = userVehicleManager;
+            _vehicleManager = vehicleManager;
         }
 
         public UserVehiclesController()
         {
             _userVehicleManager = new Business.VehicleManager();
+            _vehicleManager = _userVehicleManager as IVehicleManager;
         }
 
         // GET: UserVehicles
@@ -42,7 +45,17 @@ namespace VehicleManager.Web.Controllers
         // GET: UserVehicles/Create
         public ActionResult Create()
         {
-            return View();
+            var makes = _vehicleManager.GetMakes();
+            var viewModel = new UserVehicleViewModel
+            {
+                Makes = makes
+                    .Select(make => new SelectListItem
+                    {
+                        Value = make.Make,
+                        Text = make.Make
+                    })
+            };
+            return View(viewModel);
         }
 
         // POST: UserVehicles/Create
@@ -52,7 +65,7 @@ namespace VehicleManager.Web.Controllers
             try
             {
                 var make = collection["Make"];
-                var mpg = uint.Parse(collection["Mpg"]);
+                var mpg = byte.Parse(collection["Mpg"]);
 
                 _userVehicleManager.AddVehicle(_currentUserName, make, mpg);
 
@@ -68,7 +81,8 @@ namespace VehicleManager.Web.Controllers
         [Route("UserVehicles/Edit/{id:guid}")]
         public ActionResult Edit(Guid id)
         {
-            return View();
+            var viewModel = GetUserVehicleViewModel(id);
+            return View(viewModel);
         }
 
         // POST: UserVehicles/Edit/5
@@ -78,7 +92,7 @@ namespace VehicleManager.Web.Controllers
         {
             try
             {
-                var mpg = uint.Parse(collection["mpg"]);
+                var mpg = byte.Parse(collection["mpg"]);
                 _userVehicleManager.UpdateVehicleMpg(id, mpg);
 
                 return RedirectToAction("Index");
@@ -93,13 +107,7 @@ namespace VehicleManager.Web.Controllers
         [Route("UserVehicles/Delete/{id:guid}")]
         public ActionResult Delete(Guid id)
         {
-            var vehicle = _userVehicleManager.FindVehicle(id);
-            var viewModel = new UserVehicleViewModel
-            {
-                Id = id,
-                Make = vehicle.Make.Make,
-                Mpg = vehicle.Mpg
-            };
+            var viewModel = GetUserVehicleViewModel(id);
             return View(viewModel);
         }
 
@@ -118,6 +126,18 @@ namespace VehicleManager.Web.Controllers
             {
                 return View();
             }
+        }
+
+        private UserVehicleViewModel GetUserVehicleViewModel(Guid id)
+        {
+            var vehicle = _userVehicleManager.FindVehicle(id);
+            var viewModel = new UserVehicleViewModel
+            {
+                Id = id,
+                Make = vehicle.Make.Make,
+                Mpg = vehicle.Mpg
+            };
+            return viewModel;
         }
     }
 }

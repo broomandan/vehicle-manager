@@ -68,7 +68,7 @@ namespace VehicleManager.Business
                 .Where(x => x.UserId == userIdentifier);
         }
 
-        public void AddVehicle(string userIdentity, string make, uint mpg)
+        public void AddVehicle(string userIdentity, string make, byte mpg)
         {
             var vehicle = new UserVehicle
             {
@@ -92,7 +92,7 @@ namespace VehicleManager.Business
                 .FirstOrDefault(x => x.Id == id);
         }
 
-        public void UpdateVehicleMpg(Guid id, uint mpg)
+        public void UpdateVehicleMpg(Guid id, byte mpg)
         {
             var updatingVehicle = FindVehicle(id);
             updatingVehicle.Mpg = mpg;
