@@ -12,13 +12,10 @@ namespace VehicleManager.Web.Controllers
     {
         private readonly IUserVehicleManager _userVehicleManager;
         private readonly IVehicleManager _vehicleManager;
-        private readonly string _currentUserName;
+
 
         public UserVehiclesController(IUserVehicleManager userVehicleManager, IVehicleManager vehicleManager)
         {
-            //TODO Extend user identity to include userId 
-            _currentUserName = User.Identity.GetUserId();
-
             _userVehicleManager = userVehicleManager;
             _vehicleManager = vehicleManager;
         }
@@ -32,7 +29,9 @@ namespace VehicleManager.Web.Controllers
         // GET: UserVehicles
         public ActionResult Index()
         {
-            var vehicles = _userVehicleManager.GetVehicles(_currentUserName);
+            //TODO Extend user identity to include userId 
+            var currentUserName = User.Identity.GetUserId();
+            var vehicles = _userVehicleManager.GetVehicles(currentUserName);
             //TODO utilize AutoMapper
             var viewModel = vehicles.Select(x => new UserVehicleViewModel
             {
@@ -67,8 +66,9 @@ namespace VehicleManager.Web.Controllers
             {
                 var make = collection["Make"];
                 var mpg = byte.Parse(collection["Mpg"]);
-
-                _userVehicleManager.AddVehicle(_currentUserName, make, mpg);
+                //TODO Extend user identity to include userId 
+                var currentUserName = User.Identity.GetUserId();
+                _userVehicleManager.AddVehicle(currentUserName, make, mpg);
 
                 return RedirectToAction("Index");
             }
