@@ -7,6 +7,7 @@ using VehicleManager.Web.Models;
 
 namespace VehicleManager.Web.Controllers
 {
+    [Authorize]
     public class UserVehiclesController : Controller
     {
         private readonly IUserVehicleManager _userVehicleManager;
